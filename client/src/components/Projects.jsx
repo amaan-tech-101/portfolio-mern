@@ -159,18 +159,34 @@ function Projects() {
 
                 {/* Action buttons */}
                 <div className="flex gap-2 sm:gap-3 pt-2 border-t border-gray-100">
-                  <a
-                    href={project.github}
-                    className="flex-1 text-center py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-                  >
-                    📂 Code
-                  </a>
-                  <a
-                    href={project.live}
-                    className="flex-1 text-center py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
-                  >
-                    🔗 Live
-                  </a>
+                  {project.github === "#" ? (
+                    <div className="flex-1 text-center py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-400 bg-gray-50 rounded-lg cursor-not-allowed">
+                      📂 Coming Soon
+                    </div>
+                  ) : (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      📂 Code
+                    </a>
+                  )}
+                  {project.live === "#" ? (
+                    <div className="flex-1 text-center py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-400 bg-gray-50 rounded-lg cursor-not-allowed">
+                      🔗 Coming Soon
+                    </div>
+                  ) : (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                    >
+                      🔗 Live
+                    </a>
+                  )}
                 </div>
               </div>
             </article>

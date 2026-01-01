@@ -16,12 +16,12 @@ function About() {
     {
       degree: "Senior Secondary (Class 12th)",
       institution: "Rammurti T Nath Inter College, UP Board",
-      year: "2020 – 2022",
+      year: "2022",
     },
     {
       degree: "High School (Class 10th)",
       institution: "Almighty Montessori Inter College, UP Board",
-      year: "2018 – 2020",
+      year: "2020",
     },
   ];
 
@@ -46,12 +46,11 @@ function About() {
             </h2>
             <div className="w-16 sm:w-20 h-1 sm:h-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded mb-4 sm:mb-6 animate-slide-right delay-200"></div>
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8 animate-slide-right delay-300">
-              Motivated BCA Graduate with a strong command of the MERN stack
-              (MongoDB, Express, React, Node.js). Passionate about solving
-              complex problems through code and building intuitive, user-centric
-              web applications. Eager to join a dynamic development team to
-              contribute to scalable software solutions and continue mastering
-              modern web technologies.
+              Motivated BCA Graduate learning the MERN stack (MongoDB, Express,
+              React, Node.js). Passionate about solving complex problems through
+              code and building intuitive, user-centric web applications. Eager
+              to join a dynamic development team to contribute to scalable
+              software solutions and continue mastering modern web technologies.
             </p>
 
             {/* Education Timeline */}

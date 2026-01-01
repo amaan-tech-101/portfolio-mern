@@ -18,7 +18,7 @@ function Footer() {
               <span className="gradient-text-animated">Mohammad Amaan</span>
             </a>
             <p className="text-gray-500 text-xs sm:text-sm mt-1">
-              MERN Stack Developer | Lucknow, India
+              Aspiring MERN Developer | India
             </p>
           </div>
 
@@ -49,7 +49,7 @@ function Footer() {
               📧
             </a>
             <a
-              href="tel:+918604302007"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center text-base sm:text-lg transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:shadow-lg hover:bg-emerald-100 hover:text-emerald-600"

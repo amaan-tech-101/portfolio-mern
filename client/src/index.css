@@ -30,6 +30,11 @@ html::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 /* ===== CRAZY ANIMATIONS ===== */
 
 /* Floating animation */

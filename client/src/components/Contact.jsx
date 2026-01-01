@@ -11,12 +11,12 @@ function Contact() {
   const [status, setStatus] = useState(""); // 'sending', 'success', 'error'
 
   const contactInfo = [
-    { icon: "📍", label: "Location", value: "Lucknow, India" },
+    { icon: "📍", label: "Location", value: "India" },
     {
       icon: "📞",
       label: "Phone",
-      value: "+91 86043 02007",
-      link: "tel:+918604302007",
+      value: "Available on request",
+      link: "#",
     },
     {
       icon: "📧",
@@ -104,6 +104,8 @@ function Contact() {
               <a
                 key={info.label}
                 href={info.link || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group animate-slide-left"
                 style={{ animationDelay: `${0.3 + index * 0.1}s` }}
               >

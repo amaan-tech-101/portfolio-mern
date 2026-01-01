@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 function Hero() {
   // Typing animation
   const roles = [
-    "MERN Stack Developer",
-    "Full Stack Developer",
+    "MERN Stack Enthusiast",
+    "Junior Web Developer",
     "React Enthusiast",
     "Problem Solver",
   ];
@@ -55,6 +55,11 @@ function Hero() {
             src="/profile.jpg"
             alt="Mohammad Amaan"
             className="w-full h-full object-cover object-center scale-125"
+            onError={(e) => {
+              e.target.style.display = "none";
+              e.target.parentElement.innerHTML =
+                '<span class="text-6xl sm:text-7xl flex items-center justify-center h-full">👨‍💻</span>';
+            }}
           />
         </div>
 
@@ -83,7 +88,7 @@ function Hero() {
         {/* Location */}
         <div className="flex items-center justify-center gap-2 text-gray-500 mb-6 sm:mb-8 animate-slide-up delay-300 text-sm sm:text-base">
           <span>📍</span>
-          <span>Lucknow, India</span>
+          <span>India</span>
         </div>
 
         {/* CTAs with animations */}
@@ -111,7 +116,7 @@ function Hero() {
               link: "mailto:amaan.work101@gmail.com",
               label: "Email",
             },
-            { icon: "📞", link: "tel:+918604302007", label: "Phone" },
+            { icon: "📞", link: "#", label: "Phone" },
             {
               icon: "💼",
               link: "https://www.linkedin.com/in/mohammad-amaan-74115b3a2",
