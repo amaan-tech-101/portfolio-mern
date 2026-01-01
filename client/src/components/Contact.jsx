@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 function Contact() {
   const [focused, setFocused] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState(""); // 'sending', 'success', 'error'
 
   const contactInfo = [
     { icon: "📍", label: "Location", value: "Lucknow, India" },
@@ -18,6 +25,46 @@ function Contact() {
       link: "mailto:amaan.work101@gmail.com",
     },
   ];
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    // EmailJS configuration
+    const serviceID = "service_fenlle8";
+    const templateID = "template_iiwapid";
+    const publicKey = "gxFbaQTwFqa7E-8QH";
+
+    emailjs
+      .send(
+        serviceID,
+        templateID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: "Mohammad Amaan",
+        },
+        publicKey
+      )
+      .then(() => {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus(""), 5000);
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        setStatus("error");
+        setTimeout(() => setStatus(""), 5000);
+      });
+  };
 
   return (
     <section
@@ -95,7 +142,8 @@ function Contact() {
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
               Send a Message
             </h3>
-            <form className="space-y-4 sm:space-y-5">
+
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div>
                 <label
                   className={`block text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 transition-colors ${
@@ -106,9 +154,13 @@ function Contact() {
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Enter your name"
                   onFocus={() => setFocused("name")}
                   onBlur={() => setFocused("")}
+                  required
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-100 bg-gray-50 focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 outline-none transition-all duration-300 text-sm sm:text-base"
                 />
               </div>
@@ -122,9 +174,13 @@ function Contact() {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
                   onFocus={() => setFocused("email")}
                   onBlur={() => setFocused("")}
+                  required
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-100 bg-gray-50 focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 outline-none transition-all duration-300 text-sm sm:text-base"
                 />
               </div>
@@ -137,22 +193,43 @@ function Contact() {
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={4}
                   placeholder="Your message..."
                   onFocus={() => setFocused("message")}
                   onBlur={() => setFocused("")}
+                  required
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-100 bg-gray-50 focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 outline-none transition-all duration-300 resize-none text-sm sm:text-base"
                 ></textarea>
               </div>
+
+              {/* Status Messages */}
+              {status === "success" && (
+                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-700 text-sm">
+                  ✅ Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              {status === "error" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  ❌ Failed to send message. Please try again or email me
+                  directly.
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="group w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-indigo-200 hover:-translate-y-1 relative overflow-hidden text-sm sm:text-base"
+                disabled={status === "sending"}
+                className="group w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-indigo-200 hover:-translate-y-1 relative overflow-hidden text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  Send Message
-                  <span className="group-hover:translate-x-2 transition-transform">
-                    →
-                  </span>
+                  {status === "sending" ? "Sending..." : "Send Message"}
+                  {status !== "sending" && (
+                    <span className="group-hover:translate-x-2 transition-transform">
+                      →
+                    </span>
+                  )}
                 </span>
                 <div className="absolute inset-0 animate-shimmer"></div>
               </button>
