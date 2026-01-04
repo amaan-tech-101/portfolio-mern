@@ -26,6 +26,26 @@ export const PROJECTS = [
   },
   {
     id: 2,
+    title: 'Password Generator',
+    category: 'Frontend',
+    year: '2025',
+    description:
+      'A secure password generator tool built with React that creates strong, customizable passwords with options for length, symbols, and numbers.',
+    techStack: ['React', 'CSS', 'JavaScript'],
+    features: [
+      'Customizable password length',
+      'Include/exclude symbols & numbers',
+      'One-click copy to clipboard',
+      'Password strength indicator',
+    ],
+    emoji: '🔐',
+    gradient: 'from-cyan-400 to-blue-500',
+    bgLight: 'from-cyan-50 to-blue-50',
+    github: 'https://github.com/amaan-tech-101/password-generator',
+    live: 'https://password--generator.vercel.app/',
+  },
+  {
+    id: 3,
     title: 'Task Tracker Pro',
     category: 'MERN App',
     year: '2025',
@@ -45,7 +65,7 @@ export const PROJECTS = [
     live: '#',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Portfolio Website',
     category: 'Frontend',
     year: '2025',
