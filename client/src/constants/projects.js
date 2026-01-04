@@ -82,6 +82,6 @@ export const PROJECTS = [
     gradient: 'from-orange-400 to-rose-500',
     bgLight: 'from-orange-50 to-rose-50',
     github: 'https://github.com/amaan-tech-101/portfolio-mern',
-    live: '#',
+    live: 'https://amaan-dev.vercel.app/',
   },
 ];
