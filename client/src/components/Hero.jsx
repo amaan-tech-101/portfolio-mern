@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Hero Section Component
+ * Displays the main hero section with typing animation and profile
+ * @module components/sections/Hero
+ */
 
+import React, { useState, useEffect } from "react";
+import { PERSONAL_INFO, HERO_ROLES, HERO_CONTACT_LINKS } from "../constants";
+
+/**
+ * Hero component with animated typing effect and profile display
+ * @returns {JSX.Element} Hero section
+ */
 function Hero() {
-  // Typing animation
-  const roles = [
-    "MERN Stack Enthusiast",
-    "Junior Web Developer",
-    "React Enthusiast",
-    "Problem Solver",
-  ];
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Typing animation effect
   useEffect(() => {
-    const role = roles[currentRoleIndex];
+    const role = HERO_ROLES[currentRoleIndex];
     const timeout = setTimeout(
       () => {
         if (!isDeleting) {
@@ -25,7 +30,7 @@ function Hero() {
           setCurrentText(role.substring(0, currentText.length - 1));
           if (currentText === "") {
             setIsDeleting(false);
-            setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+            setCurrentRoleIndex((prev) => (prev + 1) % HERO_ROLES.length);
           }
         }
       },
@@ -37,12 +42,12 @@ function Hero() {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white via-indigo-50/30 to-white pt-20 sm:pt-24 px-4 sm:px-6 relative overflow-hidden">
-      {/* Animated background blobs - smaller on mobile */}
+      {/* Animated background blobs */}
       <div className="absolute top-20 left-5 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
       <div className="absolute top-40 right-5 sm:right-10 w-48 sm:w-72 h-48 sm:h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob delay-200"></div>
       <div className="absolute bottom-20 left-1/3 w-48 sm:w-72 h-48 sm:h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob delay-400"></div>
 
-      {/* Floating shapes - hidden on very small screens */}
+      {/* Floating shapes */}
       <div className="hidden sm:block absolute top-32 left-20 w-4 h-4 bg-indigo-400 rounded-full animate-float opacity-60"></div>
       <div className="hidden sm:block absolute top-48 right-32 w-6 h-6 bg-purple-400 rounded animate-float-delayed opacity-40 rotate-45"></div>
       <div className="hidden sm:block absolute bottom-40 left-40 w-3 h-3 bg-pink-400 rounded-full animate-float opacity-50"></div>
@@ -53,7 +58,7 @@ function Hero() {
         <div className="w-36 h-36 sm:w-44 sm:h-44 mx-auto mb-6 sm:mb-8 rounded-full overflow-hidden shadow-2xl animate-bounce-in animate-pulse-glow ring-4 ring-white bg-gradient-to-br from-indigo-100 to-purple-100">
           <img
             src="/profile.jpg"
-            alt="Mohammad Amaan"
+            alt={PERSONAL_INFO.name}
             className="w-full h-full object-cover object-center scale-125"
             onError={(e) => {
               e.target.style.display = "none";
@@ -68,7 +73,7 @@ function Hero() {
           Hello, I'm
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4 animate-slide-up delay-100">
-          <span className="gradient-text-animated">Mohammad Amaan</span>
+          <span className="gradient-text-animated">{PERSONAL_INFO.name}</span>
         </h1>
 
         {/* Typing Animation */}
@@ -88,10 +93,10 @@ function Hero() {
         {/* Location */}
         <div className="flex items-center justify-center gap-2 text-gray-500 mb-6 sm:mb-8 animate-slide-up delay-300 text-sm sm:text-base">
           <span>📍</span>
-          <span>India</span>
+          <span>{PERSONAL_INFO.location}</span>
         </div>
 
-        {/* CTAs with animations */}
+        {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-slide-up delay-400 px-4 sm:px-0">
           <a
             href="#projects"
@@ -110,19 +115,7 @@ function Hero() {
 
         {/* Contact links */}
         <div className="flex justify-center gap-3 sm:gap-4 mt-8 sm:mt-12">
-          {[
-            {
-              icon: "📧",
-              link: "mailto:amaan.work101@gmail.com",
-              label: "Email",
-            },
-            { icon: "📞", link: "#", label: "Phone" },
-            {
-              icon: "💼",
-              link: "https://www.linkedin.com/in/mohammad-amaan-74115b3a2",
-              label: "LinkedIn",
-            },
-          ].map((item, i) => (
+          {HERO_CONTACT_LINKS.map((item, i) => (
             <a
               key={i}
               href={item.link}

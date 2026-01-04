@@ -1,52 +1,16 @@
+/**
+ * Skills Section Component
+ * Displays technical skills, tools, and personal strengths
+ * @module components/sections/Skills
+ */
+
 import React from "react";
+import { SKILL_GROUPS, STRENGTHS, LANGUAGES } from "../constants";
 
-const skillGroups = [
-  {
-    category: "Frontend Development",
-    items: [
-      "React.js",
-      "JavaScript (ES6+)",
-      "Tailwind CSS",
-      "HTML5 & CSS3",
-      "Redux Toolkit",
-      "Vite",
-    ],
-    icon: "⚛️",
-    gradient: "from-indigo-500 to-purple-500",
-    bgLight: "from-indigo-50 to-purple-50",
-  },
-  {
-    category: "Backend Development",
-    items: [
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Mongoose",
-      "RESTful APIs",
-      "JWT Authentication",
-    ],
-    icon: "🖥️",
-    gradient: "from-emerald-500 to-teal-500",
-    bgLight: "from-emerald-50 to-teal-50",
-  },
-  {
-    category: "Tools & Version Control",
-    items: ["Git", "GitHub", "VS Code", "Postman", "AI-Assisted Workflow"],
-    icon: "🛠️",
-    gradient: "from-orange-500 to-rose-500",
-    bgLight: "from-orange-50 to-rose-50",
-  },
-];
-
-const strengths = [
-  { trait: "Strong interpersonal skills", icon: "🤝" },
-  { trait: "Calm under pressure", icon: "🧘" },
-  { trait: "Goal-oriented", icon: "🎯" },
-  { trait: "Self-motivated", icon: "🚀" },
-  { trait: "Eager to learn", icon: "📚" },
-  { trait: "Adaptable", icon: "🔄" },
-];
-
+/**
+ * Skills component displaying all technical skills and strengths
+ * @returns {JSX.Element} Skills section
+ */
 function Skills() {
   return (
     <section
@@ -75,37 +39,8 @@ function Skills() {
 
         {/* Skills Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-10 sm:mb-12 lg:mb-16">
-          {skillGroups.map((group, groupIndex) => (
-            <div
-              key={group.category}
-              className={`relative bg-gradient-to-br ${group.bgLight} rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden animate-scale-up`}
-              style={{ animationDelay: `${0.3 + groupIndex * 0.15}s` }}
-            >
-              {/* Background decoration */}
-              <div
-                className={`absolute -top-10 -right-10 w-24 sm:w-32 h-24 sm:h-32 rounded-full bg-gradient-to-r ${group.gradient} opacity-10 group-hover:scale-150 transition-transform duration-700`}
-              ></div>
-
-              {/* Icon */}
-              <div className="text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 inline-block">
-                {group.icon}
-              </div>
-
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
-                {group.category}
-              </h3>
-
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {group.items.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white text-gray-700 rounded-lg sm:rounded-xl shadow-sm hover:shadow-md hover:bg-indigo-600 hover:text-white transition-all duration-300 cursor-pointer hover:scale-105 hover:-translate-y-1"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {SKILL_GROUPS.map((group, groupIndex) => (
+            <SkillCard key={group.category} group={group} index={groupIndex} />
           ))}
         </div>
 
@@ -115,19 +50,8 @@ function Skills() {
             Personal <span className="gradient-text">Strengths</span>
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-            {strengths.map((item, index) => (
-              <div
-                key={item.trait}
-                className="text-center p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 cursor-pointer group animate-scale-up"
-                style={{ animationDelay: `${0.5 + index * 0.08}s` }}
-              >
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 group-hover:scale-125 group-hover:rotate-12 transition-all duration-300">
-                  {item.icon}
-                </div>
-                <p className="text-[10px] sm:text-xs font-medium text-gray-600">
-                  {item.trait}
-                </p>
-              </div>
+            {STRENGTHS.map((item, index) => (
+              <StrengthCard key={item.trait} item={item} index={index} />
             ))}
           </div>
         </div>
@@ -138,26 +62,87 @@ function Skills() {
             Languages Known
           </h3>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
-            <div className="px-5 sm:px-6 py-2.5 sm:py-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
-              <span className="font-semibold text-gray-900 text-sm sm:text-base">
-                English
-              </span>
-              <span className="text-gray-400 ml-2 text-sm sm:text-base">
-                • Proficient
-              </span>
-            </div>
-            <div className="px-5 sm:px-6 py-2.5 sm:py-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
-              <span className="font-semibold text-gray-900 text-sm sm:text-base">
-                Hindi
-              </span>
-              <span className="text-gray-400 ml-2 text-sm sm:text-base">
-                • Native
-              </span>
-            </div>
+            {LANGUAGES.map((lang) => (
+              <div
+                key={lang.name}
+                className="px-5 sm:px-6 py-2.5 sm:py-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-1"
+              >
+                <span className="font-semibold text-gray-900 text-sm sm:text-base">
+                  {lang.name}
+                </span>
+                <span className="text-gray-400 ml-2 text-sm sm:text-base">
+                  • {lang.level}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Individual skill category card
+ * @param {Object} props - Component props
+ * @param {Object} props.group - Skill group data
+ * @param {number} props.index - Group index for animation delay
+ * @returns {JSX.Element} Skill card
+ */
+function SkillCard({ group, index }) {
+  return (
+    <div
+      className={`relative bg-gradient-to-br ${group.bgLight} rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden animate-scale-up`}
+      style={{ animationDelay: `${0.3 + index * 0.15}s` }}
+    >
+      {/* Background decoration */}
+      <div
+        className={`absolute -top-10 -right-10 w-24 sm:w-32 h-24 sm:h-32 rounded-full bg-gradient-to-r ${group.gradient} opacity-10 group-hover:scale-150 transition-transform duration-700`}
+      ></div>
+
+      {/* Icon */}
+      <div className="text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 inline-block">
+        {group.icon}
+      </div>
+
+      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
+        {group.category}
+      </h3>
+
+      <div className="flex flex-wrap gap-2 sm:gap-3">
+        {group.items.map((skill) => (
+          <span
+            key={skill}
+            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white text-gray-700 rounded-lg sm:rounded-xl shadow-sm hover:shadow-md hover:bg-indigo-600 hover:text-white transition-all duration-300 cursor-pointer hover:scale-105 hover:-translate-y-1"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Individual strength card
+ * @param {Object} props - Component props
+ * @param {Object} props.item - Strength data
+ * @param {number} props.index - Item index for animation delay
+ * @returns {JSX.Element} Strength card
+ */
+function StrengthCard({ item, index }) {
+  return (
+    <div
+      className="text-center p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 cursor-pointer group animate-scale-up"
+      style={{ animationDelay: `${0.5 + index * 0.08}s` }}
+    >
+      <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 group-hover:scale-125 group-hover:rotate-12 transition-all duration-300">
+        {item.icon}
+      </div>
+      <p className="text-[10px] sm:text-xs font-medium text-gray-600">
+        {item.trait}
+      </p>
+    </div>
   );
 }
 

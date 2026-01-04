@@ -1,5 +1,16 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Loading Screen Component
+ * Displays animated loading screen on initial page load
+ * @module components/common/LoadingScreen
+ */
 
+import React, { useState, useEffect } from "react";
+import { PERSONAL_INFO } from "../constants";
+
+/**
+ * LoadingScreen component with animated progress bar
+ * @returns {JSX.Element|null} Loading screen or null when complete
+ */
 function LoadingScreen() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -35,9 +46,12 @@ function LoadingScreen() {
         {/* Animated logo */}
         <div className="mb-12 animate-bounce-in">
           <h1 className="text-6xl sm:text-7xl font-bold gradient-text-animated mb-2">
-            MA<span className="text-indigo-600">.</span>
+            {PERSONAL_INFO.shortName}
+            <span className="text-indigo-600">.</span>
           </h1>
-          <p className="text-gray-500 text-sm font-medium">Mohammad Amaan</p>
+          <p className="text-gray-500 text-sm font-medium">
+            {PERSONAL_INFO.name}
+          </p>
         </div>
 
         {/* Progress bar */}

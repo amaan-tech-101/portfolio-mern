@@ -1,85 +1,134 @@
+/**
+ * Footer Component
+ * Site footer with navigation and social links
+ * @module components/layout/Footer
+ */
+
 import React from "react";
+import { PERSONAL_INFO, NAV_LINKS } from "../constants";
 
+/**
+ * Footer component with navigation and social links
+ * @returns {JSX.Element} Footer component
+ */
 function Footer() {
-  return (
-    <footer className="py-10 sm:py-12 lg:py-16 px-4 sm:px-6 bg-gradient-to-b from-white to-gray-50 border-t border-gray-100 relative overflow-hidden">
-      {/* Decorative elements - hidden on mobile */}
-      <div className="hidden sm:block absolute bottom-0 left-0 w-32 sm:w-48 h-32 sm:h-48 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-50"></div>
-      <div className="hidden sm:block absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-purple-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-50"></div>
+  const currentYear = new Date().getFullYear();
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="flex flex-col items-center gap-6 sm:gap-8">
-          {/* Logo */}
-          <div className="text-center">
+  return (
+    <footer className="bg-gradient-to-b from-white to-gray-50 pt-12 sm:pt-16 pb-6 sm:pb-8 px-4 sm:px-6 border-t border-gray-100">
+      <div className="max-w-6xl mx-auto">
+        {/* Main Footer Content */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 mb-8 sm:mb-12">
+          {/* Logo & Tagline */}
+          <div className="text-center md:text-left">
             <a
               href="#"
-              className="text-xl sm:text-2xl font-bold group inline-block"
+              className="text-2xl sm:text-3xl font-bold inline-block hover:scale-105 transition-transform"
             >
-              <span className="gradient-text-animated">Mohammad Amaan</span>
+              <span className="gradient-text-animated">
+                {PERSONAL_INFO.name}
+              </span>
             </a>
             <p className="text-gray-500 text-xs sm:text-sm mt-1">
-              Aspiring MERN Developer | India
+              {PERSONAL_INFO.title} | {PERSONAL_INFO.location}
             </p>
           </div>
 
-          {/* Links */}
-          <nav>
-            <ul className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
-              {["About", "Projects", "Skills", "Contact"].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-500 hover:text-indigo-600 text-xs sm:text-sm transition-all duration-300 hover:-translate-y-1 inline-block"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Navigation Links */}
+          <FooterNav />
 
-          {/* Contact Icons */}
-          <div className="flex gap-3 sm:gap-4">
-            <a
-              href="mailto:amaan.work101@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center text-base sm:text-lg transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:shadow-lg hover:bg-indigo-100 hover:text-indigo-600"
-            >
-              📧
-            </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center text-base sm:text-lg transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:shadow-lg hover:bg-emerald-100 hover:text-emerald-600"
-            >
-              📞
-            </a>
-            <a
-              href="https://www.linkedin.com/in/mohammad-amaan-74115b3a2"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center text-base sm:text-lg transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:shadow-lg hover:bg-blue-100 hover:text-blue-600"
-            >
-              💼
-            </a>
-          </div>
+          {/* Social Links */}
+          <SocialLinks />
         </div>
-
-        {/* Divider with gradient */}
-        <div className="my-6 sm:my-8 lg:my-10 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
 
         {/* Copyright */}
-        <div className="text-center">
-          <p className="text-gray-400 text-xs sm:text-sm">
-            © {new Date().getFullYear()} Mohammad Amaan. Built with{" "}
-            <span className="inline-block animate-pulse text-red-500">❤️</span>{" "}
-            using React & Tailwind CSS
-          </p>
-        </div>
+        <Copyright year={currentYear} />
       </div>
     </footer>
+  );
+}
+
+/**
+ * Footer navigation links
+ * @returns {JSX.Element} Navigation links
+ */
+function FooterNav() {
+  return (
+    <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
+      {NAV_LINKS.map((item) => (
+        <a
+          key={item}
+          href={`#${item.toLowerCase()}`}
+          className="text-xs sm:text-sm text-gray-500 hover:text-indigo-600 transition-colors font-medium"
+        >
+          {item}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+/**
+ * Social media links
+ * @returns {JSX.Element} Social links
+ */
+function SocialLinks() {
+  const socialLinks = [
+    {
+      icon: "💼",
+      href: PERSONAL_INFO.linkedin,
+      hoverClass: "hover:bg-blue-100 hover:text-blue-600",
+    },
+    {
+      icon: "📧",
+      href: `mailto:${PERSONAL_INFO.email}`,
+      hoverClass: "hover:bg-red-100 hover:text-red-600",
+    },
+    {
+      icon: "📞",
+      href: "#",
+      hoverClass: "hover:bg-emerald-100 hover:text-emerald-600",
+    },
+  ];
+
+  return (
+    <div className="flex items-center gap-2 sm:gap-3">
+      {socialLinks.map((link, index) => (
+        <a
+          key={index}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center text-base sm:text-lg transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:shadow-lg ${link.hoverClass}`}
+        >
+          {link.icon}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Copyright section
+ * @param {Object} props - Component props
+ * @param {number} props.year - Current year
+ * @returns {JSX.Element} Copyright section
+ */
+function Copyright({ year }) {
+  return (
+    <div className="pt-6 sm:pt-8 border-t border-gray-100 text-center">
+      <p className="text-xs sm:text-sm text-gray-400">
+        © {year}{" "}
+        <span className="font-semibold text-gray-600">
+          {PERSONAL_INFO.name}
+        </span>
+        . All rights reserved.
+      </p>
+      <p className="text-[10px] sm:text-xs text-gray-400 mt-2 flex items-center justify-center gap-1">
+        Made with <span className="text-red-500 animate-pulse">❤️</span> using
+        React & Tailwind CSS
+      </p>
+    </div>
   );
 }
 
