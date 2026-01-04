@@ -28,7 +28,7 @@ export const PROJECTS = [
     id: 2,
     title: 'Password Generator',
     category: 'Frontend',
-    year: '2025',
+    year: '2026',
     description:
       'A secure password generator tool built with React that creates strong, customizable passwords with options for length, symbols, and numbers.',
     techStack: ['React', 'CSS', 'JavaScript'],
@@ -68,7 +68,7 @@ export const PROJECTS = [
     id: 4,
     title: 'Portfolio Website',
     category: 'Frontend',
-    year: '2025',
+    year: '2026',
     description:
       'This responsive portfolio website built with React and Tailwind CSS, featuring smooth animations and modern UI design.',
     techStack: ['React', 'Tailwind CSS', 'Vite', 'JavaScript'],

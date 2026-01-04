@@ -17,12 +17,12 @@ export const EDUCATION = [
   {
     degree: 'Senior Secondary (Class 12th)',
     institution: 'Rammurti T Nath Inter College, UP Board',
-    year: '2020 – 2022',
+    year: '2022',
   },
   {
     degree: 'High School (Class 10th)',
     institution: 'Almighty Montessori Inter College, UP Board',
-    year: '2018 – 2020',
+    year: '2020',
   },
 ];
 
